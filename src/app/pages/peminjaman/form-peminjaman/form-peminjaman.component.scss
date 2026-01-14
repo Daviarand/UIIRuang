@@ -1,0 +1,788 @@
+.page-content {
+    padding: var(--spacing-md);
+    background-color: var(--bg-gray);
+}
+
+.content-card {
+    background: var(--bg-white);
+    border-radius: 5px;
+    padding: var(--spacing-lg);
+}
+
+.page-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.title-underline {
+    height: 1px;
+    background: #ffc107;
+    margin-bottom: var(--spacing-lg);
+}
+
+// Room Detail Section (Above Tabs)
+.room-detail-section {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.room-layout {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: var(--spacing-xl);
+
+    @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.room-images {
+    .main-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: var(--radius-md);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .thumbnail-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-xs);
+
+        .thumbnail {
+            width: 100%;
+            height: 70px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            border: 2px solid transparent;
+
+            &:hover {
+                border-color: var(--primary-blue);
+            }
+        }
+    }
+}
+
+.room-info-container {
+    .room-name {
+        font-size: var(--font-size-lg);
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+.room-info-grid {
+    margin-bottom: var(--spacing-md);
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--spacing-sm) 0;
+        border-bottom: 1px solid #f5f5f5;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            font-size: var(--font-size-xs);
+            color: var(--text-muted);
+            font-weight: 500;
+            flex: 0 0 150px;
+        }
+
+        .value {
+            font-size: var(--font-size-sm);
+            color: var(--text-primary);
+            font-weight: 500;
+            flex: 1;
+            text-align: right;
+        }
+
+        .link {
+            font-size: var(--font-size-xs);
+            color: var(--primary-blue);
+            text-decoration: underline;
+
+            &:hover {
+                color: #144a99;
+            }
+        }
+    }
+}
+
+.room-description,
+.room-facilities {
+    margin-bottom: var(--spacing-md);
+
+    h4 {
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    p {
+        font-size: var(--font-size-xs);
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+}
+
+.facility-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+
+    .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        font-size: var(--font-size-xs);
+        color: var(--text-secondary);
+
+        input[type="checkbox"] {
+            accent-color: var(--primary-blue);
+        }
+    }
+}
+
+// Tab Navigation (Centered)
+.tabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: var(--spacing-xl);
+    gap: var(--spacing-md);
+}
+
+.tab-btn {
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: -2px;
+
+    &:hover {
+        color: var(--primary-blue);
+    }
+
+    &.active {
+        color: var(--primary-blue);
+        border-bottom-color: var(--primary-blue);
+    }
+}
+
+// Form Groups
+.form-group-section {
+    margin-bottom: var(--spacing-xl);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Section Title Wrapper (contains title + add button)
+.section-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--primary-blue);
+    margin: 0;
+
+    svg {
+        fill: var(--primary-blue);
+    }
+}
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+
+    label {
+        display: block;
+        font-size: var(--font-size-sm);
+        font-weight: 500;
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-xs);
+
+        .required {
+            color: #dc3545;
+            margin-left: 2px;
+        }
+    }
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.radio-group {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+
+    input[type="radio"] {
+        accent-color: var(--primary-blue);
+    }
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid #ddd;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+
+    &:focus {
+        outline: none;
+        border-color: var(--primary-blue);
+    }
+}
+
+.form-textarea {
+    resize: vertical;
+    font-family: inherit;
+}
+
+// File Upload
+.upload-section {
+    margin-top: var(--spacing-xs);
+}
+
+.upload-area {
+    border: 2px dashed #ddd;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    text-align: center;
+    position: relative;
+
+    .file-input {
+        display: none;
+    }
+
+    .upload-label {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-sm);
+        cursor: pointer;
+
+        svg {
+            fill: var(--primary-blue);
+        }
+
+        .upload-text {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-lg);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+        }
+    }
+
+    .upload-hint {
+        font-size: var(--font-size-xs);
+        color: var(--text-muted);
+        margin-top: var(--spacing-sm);
+        line-height: 1.5;
+    }
+}
+
+.uploaded-file {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background-color: #f5f5f5;
+    border-radius: var(--radius-sm);
+
+    svg {
+        fill: var(--primary-blue);
+    }
+
+    span {
+        flex: 1;
+        font-size: var(--font-size-sm);
+    }
+
+    .btn-remove {
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 20px;
+        line-height: 1;
+
+        &:hover {
+            background: #c82333;
+        }
+    }
+}
+
+// Accordion
+.accordion-item {
+    margin-bottom: var(--spacing-md);
+    padding-right: 8%;
+}
+
+
+// Time row - full width for Waktu fields
+.time-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+// Add More Button Wrapper - positioned at bottom right
+.add-more-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+
+// Add More Button (Green Plus)
+.btn-add-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: #218838;
+        transform: scale(1.05);
+    }
+}
+
+
+// Form Agreement Checkbox
+.form-agreement {
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+
+    .agreement-checkbox {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+        cursor: pointer;
+        position: relative;
+        padding-left: 28px;
+
+        input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 18px;
+            height: 18px;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input:checked~.checkmark {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 5px;
+            top: 1px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        input:checked~.checkmark:after {
+            display: block;
+        }
+
+        .agreement-text {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+    }
+}
+
+
+.accordion-header {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &.active {
+        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    }
+}
+
+.accordion-content {
+    padding: var(--spacing-md);
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+// Form Note
+.form-note {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    text-align: center;
+    margin: var(--spacing-lg) 0;
+}
+
+// Action Buttons
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+// Ketersediaan Ruang Tab
+.ketersediaan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-sm) 0;
+}
+
+.week-navigation {
+    display: flex;
+    gap: var(--spacing-sm);
+
+    .btn-nav {
+        padding: var(--spacing-xs);
+        background: var(--bg-white);
+        border: 1px solid #ddd;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        color: var(--text-secondary);
+
+        &:hover {
+            background: var(--bg-gray);
+        }
+    }
+}
+
+.legend {
+    display: flex;
+    gap: var(--spacing-lg);
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+    }
+
+    .legend-box {
+        width: 20px;
+        height: 20px;
+        border-radius: var(--radius-sm);
+
+        &.verified {
+            background-color: #cce5ff;
+            border: 1px solid #1e3a8a;
+        }
+
+        &.pending {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+        }
+    }
+}
+
+.weekly-scheduler-wrapper {
+    overflow-x: auto;
+    margin-top: var(--spacing-md);
+}
+
+.weekly-scheduler-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-white);
+    min-width: 1000px;
+
+    thead {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: var(--bg-white);
+    }
+
+    th {
+        padding: var(--spacing-md);
+        text-align: center;
+        border: 1px solid #e0e0e0;
+        background-color: #f5f5f5;
+        font-weight: 600;
+        font-size: var(--font-size-sm);
+
+        &.time-column {
+            width: 120px;
+            position: sticky;
+            left: 0;
+            z-index: 11;
+            background-color: #f5f5f5;
+        }
+
+        &.day-header {
+            min-width: 120px;
+        }
+    }
+
+    td {
+        padding: var(--spacing-sm);
+        border: 1px solid #e0e0e0;
+        text-align: center;
+        position: relative;
+        min-height: 50px;
+
+        &.time-cell {
+            position: sticky;
+            left: 0;
+            z-index: 9;
+            background-color: var(--bg-white);
+            font-weight: 500;
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        &.schedule-cell {
+            vertical-align: top;
+
+            &.verified {
+                background-color: #cce5ff;
+            }
+
+            &.pending {
+                background-color: #fff3cd;
+            }
+        }
+    }
+
+    .booking-info {
+        text-align: left;
+        padding: var(--spacing-xs);
+
+        .booking-time {
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .booking-event {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .booking-unit {
+            font-size: var(--font-size-xs);
+            color: var(--text-secondary);
+        }
+    }
+}
+
+.info-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+// Aturan Peminjaman Tab
+.aturan-content {
+    max-width: 900px;
+}
+
+.aturan-title {
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.aturan-desc {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-lg);
+}
+
+.aturan-item {
+    margin-bottom: var(--spacing-md);
+
+    h4 {
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    p {
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+        line-height: 1.7;
+
+        strong {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+    }
+}
+
+// Confirmation Modal
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--bg-white);
+    border-radius: 8px;
+    padding: var(--spacing-xl);
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+}
+
+.modal-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto var(--spacing-md);
+    background-color: #ffc107;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        color: white;
+    }
+}
+
+.modal-title {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.modal-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.modal-info {
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    text-align: left;
+
+    .info-row {
+        display: flex;
+        padding: var(--spacing-xs) 0;
+
+        .info-label {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            flex: 0 0 150px;
+        }
+
+        .info-value {
+            font-size: var(--font-size-sm);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+    }
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+}

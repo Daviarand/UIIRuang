@@ -1,18 +1,20 @@
 <div class="app-container">
   <app-header></app-header>
 
-  <!-- Breadcrumb Area - di luar sidebar dan content -->
+  <!-- Breadcrumb Area -->
   <div class="breadcrumb-area">
     <div class="breadcrumb">
-      <a href="/" class="breadcrumb-item">
+      <a href="/" class="breadcrumb-home">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
           <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
         </svg>
       </a>
-      <span class="breadcrumb-separator">></span>
-      <a href="/peminjaman" class="breadcrumb-item">UIIRuang</a>
-      <span class="breadcrumb-separator">></span>
-      <span class="breadcrumb-current">Peminjaman</span>
+
+      <ng-container *ngFor="let crumb of breadcrumbs; let last = last">
+        <span class="breadcrumb-separator">&gt;</span>
+        <a *ngIf="!crumb.isActive" [routerLink]="crumb.url" class="breadcrumb-link">{{ crumb.label }}</a>
+        <span *ngIf="crumb.isActive" class="breadcrumb-current">{{ crumb.label }}</span>
+      </ng-container>
     </div>
   </div>
 

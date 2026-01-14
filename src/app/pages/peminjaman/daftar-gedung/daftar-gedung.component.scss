@@ -5,7 +5,7 @@
 // Content Card
 .content-card {
     background: var(--bg-white);
-    border-radius: 5px;
+
     padding: var(--spacing-lg);
 }
 
@@ -18,7 +18,7 @@
 
 // Yellow underline like in the design - full width
 .title-underline {
-    height: 3px;
+    height: 1px;
     background: #ffc107;
     margin-bottom: var(--spacing-lg);
 }
@@ -136,6 +136,30 @@
 
     .table {
         min-width: 700px;
+
+        // Override header background to white
+        th {
+            background-color: var(--bg-white);
+            color: var(--text-primary);
+            font-weight: 600;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        // Alternating row colors (striped)
+        tbody tr {
+            &:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            &:nth-child(even) {
+                background-color: #eeeeee;
+            }
+
+            // Remove hover effect
+            &:hover td {
+                background-color: inherit !important;
+            }
+        }
     }
 
     .btn-sm {

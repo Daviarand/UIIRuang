@@ -4,7 +4,7 @@
 
 .content-card {
     background: var(--bg-white);
-    border-radius: var(--radius-md);
+    // border-radius: 5px;
     padding: var(--spacing-lg);
 }
 
@@ -16,7 +16,7 @@
 }
 
 .title-underline {
-    height: 3px;
+    height: 1px;
     background: #ffc107;
     margin-bottom: var(--spacing-lg);
 }

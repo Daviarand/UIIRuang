@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface Gedung {
     id: number;
@@ -18,6 +19,8 @@ export class DaftarGedungComponent {
     viewMode: 'grid' | 'tabel' = 'grid';
     itemsPerPage: number = 10;
     searchQuery: string = '';
+
+    constructor(private router: Router) { }
 
     // Dummy data gedung
     gedungList: Gedung[] = [
@@ -120,6 +123,6 @@ export class DaftarGedungComponent {
 
     navigateToRuangan(gedung: Gedung): void {
         // Navigate to jadwal ruangan
-        console.log('Navigating to gedung:', gedung.nama);
+        this.router.navigate(['/peminjaman/jadwal', gedung.id]);
     }
 }
