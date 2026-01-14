@@ -5,9 +5,10 @@
     align-items: center;
     justify-content: center;
     padding: var(--spacing-md) 0;
+    font-size: 12px;
 
     p {
-        font-size: var(--font-size-sm);
+        font-size: 10px;
         color: var(--text-secondary);
     }
 }

@@ -9,7 +9,7 @@
 }
 
 .page-title {
-    font-size: var(--font-size-xl);
+    font-size: 16px; // 14px as requested
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: var(--spacing-sm);
@@ -23,6 +23,10 @@
 
 // Filter Section
 .filter-section {
+    background-color: #f8f9fa; // Light grey background like reference
+    border: 1px solid #e9ecef;
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 }
 
@@ -30,7 +34,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-md); // Spacing between rows
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 
     @media (max-width: 1024px) {
         grid-template-columns: 1fr;
@@ -40,21 +48,50 @@
 .filter-item {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
+    gap: 8px; // Fixed gap between label and input
 
     label {
-        font-size: var(--font-size-sm);
+        font-size: 12px;
         font-weight: 500;
         color: var(--text-secondary);
+        min-height: 21px; // Ensure consistent height even if empty
 
         .required {
             color: #dc3545;
         }
     }
 
+    .form-select,
+    .form-input,
     .btn-search-filter {
+        height: 42px; // Consistent height for all inputs and button
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+        padding: 0 12px;
+        font-size: 14px; // Reduced from 14px
+        font-family: inherit;
         width: 100%;
-        margin-top: 22px;
+        box-sizing: border-box; // Ensure padding doesnt affect width
+
+        &:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.1);
+        }
+    }
+
+    .btn-search-filter {
+        background-color: #003366; // Dark blue like reference
+        color: white;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        margin-top: 0; // Remove manual margin, rely on flex gap
+
+        &:hover {
+            background-color: #002244;
+        }
     }
 }
 
@@ -93,23 +130,24 @@
         display: flex;
         align-items: center;
         gap: var(--spacing-xs);
-        font-size: var(--font-size-sm);
+        font-size: 12px;
         color: var(--text-secondary);
     }
 
     .legend-box {
-        width: 20px;
-        height: 20px;
-        border-radius: var(--radius-sm);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%; // Bulat
+        display: inline-block;
 
         &.verified {
-            background-color: #cce5ff;
-            border: 1px solid #1e3a8a;
+            background-color: #1e3a8a; // Solid Blue
+            border: none;
         }
 
         &.pending {
-            background-color: #fff3cd;
-            border: 1px solid #ffc107;
+            background-color: #ffc107; // Solid Yellow
+            border: none;
         }
     }
 }
@@ -139,7 +177,7 @@
         border: 1px solid #e0e0e0;
         background-color: #f5f5f5;
         font-weight: 600;
-        font-size: var(--font-size-sm);
+        font-size: 12px; // Default header size
 
         &.time-column {
             width: 120px;
@@ -153,13 +191,13 @@
             min-width: 150px;
 
             .room-name {
-                font-size: var(--font-size-md);
+                font-size: 13px; // Smaller room name
                 color: var(--text-primary);
                 margin-bottom: var(--spacing-xs);
             }
 
             .room-info {
-                font-size: var(--font-size-xs);
+                font-size: 10px;
                 color: var(--text-muted);
                 font-weight: 400;
             }
@@ -178,14 +216,15 @@
             z-index: 9;
             background-color: var(--bg-white);
             font-weight: 500;
-            font-size: var(--font-size-sm);
+            font-size: 11px; // Smaller time label
             color: var(--text-secondary);
         }
 
         &.schedule-cell {
             cursor: pointer;
             transition: all 0.2s ease;
-            min-height: 50px;
+            height: 1px; // Allow child 100% height
+            padding: 0; // Move padding to inner
             vertical-align: top;
 
             &:not(.has-booking):hover {
@@ -214,46 +253,49 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-size: var(--font-size-sm);
+        font-size: 10px;
         color: var(--primary-blue);
         font-weight: 500;
         white-space: nowrap;
     }
 
     .booking-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; // Align to top
+        height: 100%;
         text-align: left;
         padding: var(--spacing-sm);
+        position: relative; // For absolute positioning if needed, though flex is better here
 
         .booking-time {
-            font-size: var(--font-size-sm);
-            font-weight: 600;
+            font-size: 11px; // Smaller font
+            font-weight: 500;
             color: var(--primary-blue);
-            margin-bottom: var(--spacing-xs);
+            margin-bottom: 2px;
         }
 
         .booking-event {
-            font-size: var(--font-size-sm);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-xs);
+            font-size: 12px; // Slightly larger for event name
+            font-weight: 700; // Bold
+            color: var(--primary-blue);
+            line-height: 1.2;
+            margin-bottom: 4px;
         }
 
-        .booking-detail-link {
+        .booking-organizer {
             display: flex;
             align-items: center;
-            gap: var(--spacing-xs);
-            font-size: var(--font-size-xs);
+            gap: 4px;
+            font-size: 10px; // Very small for unit name
             color: var(--primary-blue);
-            margin-bottom: var(--spacing-xs);
+            margin-top: auto; // Push to bottom explicitly
 
             svg {
                 flex-shrink: 0;
+                width: 12px;
+                height: 12px;
             }
-        }
-
-        .booking-unit {
-            font-size: var(--font-size-xs);
-            color: var(--text-secondary);
         }
     }
 }

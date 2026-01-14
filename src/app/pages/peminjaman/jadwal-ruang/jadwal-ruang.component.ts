@@ -111,6 +111,7 @@ export class JadwalRuangComponent implements OnInit {
         this.setTodayDate();
         this.loadRoomsForGedung();
         this.updateRuangList();
+        this.onSearch(); // Initialize displayedRooms
     }
 
     initializeTimeSlots(): void {
@@ -166,8 +167,12 @@ export class JadwalRuangComponent implements OnInit {
         this.ruangList = ['Semua ruang', ...rooms.map(r => r.name)];
     }
 
-    // Computed property for filtered rooms
-    get filteredRooms(): Room[] {
+    // Rooms currently displayed in the table
+    displayedRooms: Room[] = [];
+
+    onSearch(): void {
+        console.log('Search triggered');
+
         let filtered = [...this.allRooms];
 
         // Filter by Lantai
@@ -181,17 +186,7 @@ export class JadwalRuangComponent implements OnInit {
             filtered = filtered.filter(r => r.name === this.selectedRuang);
         }
 
-        return filtered;
-    }
-
-    onSearch(): void {
-        console.log('Search with filters:', {
-            gedung: this.selectedGedung,
-            lantai: this.selectedLantai,
-            ruang: this.selectedRuang,
-            date: this.selectedDate,
-            capacity: this.capacityFilter
-        });
+        this.displayedRooms = filtered;
     }
 
     getBookingForCell(roomId: number, hour: number): Booking | null {

@@ -387,7 +387,7 @@ export class FormPeminjamanComponent implements OnInit {
         alert('Pengajuan peminjaman berhasil dikirim!');
 
         // Navigate back to scheduler
-        this.router.navigate(['/peminjaman']);
+        this.router.navigate(['/peminjaman/jadwal', '1']);
     }
 
     onCancelConfirm(): void {
@@ -396,7 +396,7 @@ export class FormPeminjamanComponent implements OnInit {
 
     onBatal(): void {
         if (confirm('Batalkan pengisian form?')) {
-            this.router.navigate(['/peminjaman']);
+            this.router.navigate(['/peminjaman/jadwal', '1']);
         }
     }
 }

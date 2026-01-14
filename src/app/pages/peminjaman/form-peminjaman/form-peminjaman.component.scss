@@ -10,7 +10,7 @@
 }
 
 .page-title {
-    font-size: var(--font-size-xl);
+    font-size: 16px; // 14px as requested
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: var(--spacing-sm);
@@ -82,7 +82,8 @@
 
     .info-row {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start; // Align left
+        align-items: baseline; // Align text properly
         padding: var(--spacing-sm) 0;
         border-bottom: 1px solid #f5f5f5;
 
@@ -91,18 +92,18 @@
         }
 
         .label {
-            font-size: var(--font-size-xs);
-            color: var(--text-muted);
-            font-weight: 500;
+            font-size: 14px;
+            color: #333; // Darker label color
+            font-weight: 700; // Bold label
             flex: 0 0 150px;
         }
 
         .value {
-            font-size: var(--font-size-sm);
-            color: var(--text-primary);
-            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 400;
             flex: 1;
-            text-align: right;
+            text-align: left; // Left align value
         }
 
         .link {
@@ -122,16 +123,16 @@
     margin-bottom: var(--spacing-md);
 
     h4 {
-        font-size: var(--font-size-sm);
-        font-weight: 600;
+        font-size: 14px;
+        font-weight: 700;
         color: var(--text-primary);
-        margin-bottom: var(--spacing-sm);
+        margin-bottom: 4px; // Closer spacing
     }
 
     p {
-        font-size: var(--font-size-xs);
+        font-size: 12px;
         color: var(--text-secondary);
-        line-height: 1.6;
+        line-height: normal;
     }
 }
 
@@ -153,26 +154,28 @@
     }
 }
 
-// Tab Navigation (Centered)
+// Tab Navigation (Full Width)
 .tabs {
     display: flex;
-    justify-content: center;
-    border-bottom: 2px solid #e0e0e0;
+    justify-content: flex-start;
+    border-bottom: 1px solid #e0e0e0; // Thinner border
     margin-bottom: var(--spacing-xl);
-    gap: var(--spacing-md);
+    width: 100%;
 }
 
 .tab-btn {
-    padding: var(--spacing-md) var(--spacing-xl);
+    flex: 1; // Make tabs full width and equal size
+    padding: var(--spacing-md) var(--spacing-sm);
     background: transparent;
     border: none;
-    border-bottom: 3px solid transparent;
-    font-size: var(--font-size-sm);
+    border-bottom: 2px solid transparent; // Match border width
+    font-size: 14px;
     font-weight: 500;
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.2s ease;
-    margin-bottom: -2px;
+    margin-bottom: -1px; // Align with border
+    text-align: center;
 
     &:hover {
         color: var(--primary-blue);
@@ -193,14 +196,6 @@
     }
 }
 
-// Section Title Wrapper (contains title + add button)
-.section-title-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: var(--spacing-md);
-}
-
 .section-title {
     display: flex;
     align-items: center;
@@ -208,7 +203,7 @@
     font-size: var(--font-size-md);
     font-weight: 600;
     color: var(--primary-blue);
-    margin: 0;
+    margin-bottom: var(--spacing-md);
 
     svg {
         fill: var(--primary-blue);
@@ -361,25 +356,33 @@
 }
 
 // Accordion
+// Accordion
 .accordion-item {
     margin-bottom: var(--spacing-md);
-    padding-right: 8%;
+    flex: 1; // Allow accordion to take available space
 }
 
+// Wrapper for Accordion + Plus Button
+.time-section-wrapper {
+    display: flex;
+    align-items: flex-end; // Align items to bottom
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+
+    .accordion-item {
+        margin-bottom: 0; // Remove margin inside wrapper so layout aligns to visual border
+    }
+
+    .btn-add-more {
+        margin-bottom: 4px; // Sedikit naik agar lebih estetik sejajar dengan border bawah
+    }
+}
 
 // Time row - full width for Waktu fields
 .time-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-md);
-}
-
-// Add More Button Wrapper - positioned at bottom right
-.add-more-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
 }
 
 
@@ -390,10 +393,10 @@
     justify-content: center;
     width: 40px;
     height: 40px;
-    background-color: #28a745;
+    background-color: #20b29a;
     color: white;
     border: none;
-    border-radius: 50%;
+    border-radius: 10%;
     cursor: pointer;
     transition: all 0.2s ease;
 
@@ -541,23 +544,24 @@
         display: flex;
         align-items: center;
         gap: var(--spacing-xs);
-        font-size: var(--font-size-sm);
+        font-size: 10px; // 10px as requested
         color: var(--text-secondary);
     }
 
     .legend-box {
-        width: 20px;
-        height: 20px;
-        border-radius: var(--radius-sm);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
 
         &.verified {
-            background-color: #cce5ff;
-            border: 1px solid #1e3a8a;
+            background-color: #1e3a8a; // Solid Blue
+            border: none;
         }
 
         &.pending {
-            background-color: #fff3cd;
-            border: 1px solid #ffc107;
+            background-color: #ffc107; // Solid Yellow
+            border: none;
         }
     }
 }
@@ -636,22 +640,26 @@
         padding: var(--spacing-xs);
 
         .booking-time {
-            font-size: var(--font-size-xs);
+            font-size: 11px;
             font-weight: 600;
             color: var(--primary-blue);
-            margin-bottom: var(--spacing-xs);
+            margin-bottom: 2px;
         }
 
         .booking-event {
-            font-size: var(--font-size-sm);
+            font-size: 12px;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: var(--spacing-xs);
+            margin-bottom: 4px;
+            line-height: normal;
         }
 
         .booking-unit {
-            font-size: var(--font-size-xs);
+            font-size: 10px;
             color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
     }
 }
@@ -669,7 +677,7 @@
 }
 
 .aturan-title {
-    font-size: var(--font-size-md);
+    font-size: 14px;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: var(--spacing-sm);

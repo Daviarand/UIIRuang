@@ -41,8 +41,7 @@
 
                 <div class="filter-item">
                     <label for="kapasitas">Kapasitas</label>
-                    <input type="number" id="kapasitas" class="form-input" placeholder="Kapasitas ruang"
-                        [(ngModel)]="capacityFilter">
+                    <input type="number" id="kapasitas" class="form-input" placeholder="-" [(ngModel)]="capacityFilter">
                 </div>
 
                 <div class="filter-item">
@@ -87,7 +86,7 @@
                 <thead>
                     <tr>
                         <th class="time-column">Waktu/Ruang</th>
-                        <th *ngFor="let room of filteredRooms" class="room-header">
+                        <th *ngFor="let room of displayedRooms" class="room-header">
                             <div class="room-name">{{ room.name }}</div>
                             <div class="room-info">Lantai {{ room.floor }}</div>
                         </th>
@@ -97,7 +96,7 @@
                     <tr *ngFor="let slot of timeSlots">
                         <td class="time-cell">{{ slot.time }}</td>
 
-                        <ng-container *ngFor="let room of filteredRooms">
+                        <ng-container *ngFor="let room of displayedRooms">
                             <td class="schedule-cell"
                                 *ngIf="!getBookingForCell(room.id, slot.hour) || isFirstSlotOfBooking(room.id, slot.hour)"
                                 [class.has-booking]="getBookingForCell(room.id, slot.hour)"
@@ -109,18 +108,18 @@
                                 <div class="booking-info" *ngIf="getBookingForCell(room.id, slot.hour) as booking">
                                     <div class="booking-time">
                                         {{ booking.startHour.toString().padStart(2, '0') }}.00 - {{
-                                        booking.endHour.toString().padStart(2, '0') }}.00 WIB
+                                        booking.endHour.toString().padStart(2, '0') }}.00
                                     </div>
                                     <div class="booking-event">{{ booking.eventType }}</div>
-                                    <div class="booking-detail-link">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+
+                                    <div class="booking-organizer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
                                             viewBox="0 0 24 24" fill="currentColor">
                                             <path
-                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+                                                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                                         </svg>
-                                        <span>Detail</span>
+                                        <span>{{ booking.unit }}</span>
                                     </div>
-                                    <div class="booking-unit">{{ booking.unit }}</div>
                                 </div>
 
                                 <div class="available-hover" *ngIf="!getBookingForCell(room.id, slot.hour)">
