@@ -1,0 +1,133 @@
+<div class="page-content">
+    <!-- Main Content Card -->
+    <div class="content-card">
+        <h1 class="page-title">Ketersediaan ruang</h1>
+
+        <!-- Yellow Line -->
+        <div class="title-underline"></div>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <!-- Row 1: Gedung, Lantai, Ruang -->
+            <div class="filter-row">
+                <div class="filter-item">
+                    <label for="gedung">Gedung <span class="required">*</span></label>
+                    <select id="gedung" class="form-select" [(ngModel)]="selectedGedung" (change)="onGedungChange()">
+                        <option *ngFor="let gedung of gedungList" [value]="gedung">{{ gedung }}</option>
+                    </select>
+                </div>
+
+                <div class="filter-item">
+                    <label for="lantai">Lantai <span class="required">*</span></label>
+                    <select id="lantai" class="form-select" [(ngModel)]="selectedLantai">
+                        <option *ngFor="let lantai of lantaiList" [value]="lantai">{{ lantai }}</option>
+                    </select>
+                </div>
+
+                <div class="filter-item">
+                    <label for="ruang">Ruang <span class="required">*</span></label>
+                    <select id="ruang" class="form-select" [(ngModel)]="selectedRuang">
+                        <option *ngFor="let ruang of ruangList" [value]="ruang">{{ ruang }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Row 2: Tanggal, Kapasitas, Button -->
+            <div class="filter-row">
+                <div class="filter-item">
+                    <label for="tanggal">Tanggal peminjaman <span class="required">*</span></label>
+                    <input type="date" id="tanggal" class="form-input" [(ngModel)]="selectedDate">
+                </div>
+
+                <div class="filter-item">
+                    <label for="kapasitas">Kapasitas</label>
+                    <input type="number" id="kapasitas" class="form-input" placeholder="Kapasitas ruang"
+                        [(ngModel)]="capacityFilter">
+                </div>
+
+                <div class="filter-item">
+                    <label>&nbsp;</label>
+                    <button class="btn btn-primary btn-search-filter" (click)="onSearch()">Cari</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation & Legend -->
+        <div class="schedule-controls">
+            <div class="month-navigation">
+                <button class="btn-nav">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                    </svg>
+                </button>
+                <button class="btn-nav">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <span class="legend-box verified"></span>
+                    <span>Sudah dipinjam</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-box pending"></span>
+                    <span>Menunggu konfirmasi</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scheduler Table -->
+        <div class="scheduler-wrapper">
+            <table class="scheduler-table">
+                <thead>
+                    <tr>
+                        <th class="time-column">Waktu/Ruang</th>
+                        <th *ngFor="let room of rooms" class="room-header">
+                            <div class="room-name">{{ room.name }}</div>
+                            <div class="room-info">Lantai {{ room.floor }}</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let slot of timeSlots">
+                        <td class="time-cell">{{ slot.time }}</td>
+                        <td *ngFor="let room of rooms" class="schedule-cell"
+                            [class.has-booking]="getBookingForCell(room.id, slot.hour)"
+                            [class.verified]="getBookingForCell(room.id, slot.hour)?.status === 'verified'"
+                            [class.pending]="getBookingForCell(room.id, slot.hour)?.status === 'pending'"
+                            [attr.rowspan]="isFirstSlotOfBooking(room.id, slot.hour) ? getBookingRowSpan(getBookingForCell(room.id, slot.hour)!) : null"
+                            *ngIf="!getBookingForCell(room.id, slot.hour) || isFirstSlotOfBooking(room.id, slot.hour)"
+                            (click)="onCellClick(room, slot.hour)">
+
+                            <div class="booking-info" *ngIf="getBookingForCell(room.id, slot.hour) as booking">
+                                <div class="booking-time">
+                                    {{ booking.startHour.toString().padStart(2, '0') }}.00 - {{
+                                    booking.endHour.toString().padStart(2, '0') }}.00 WIB
+                                </div>
+                                <div class="booking-event">{{ booking.eventType }}</div>
+                                <div class="booking-detail-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="currentColor">
+                                        <path
+                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+                                    </svg>
+                                    <span>Sudah Sistem Informasi</span>
+                                </div>
+                                <div class="booking-unit">{{ booking.unit }}</div>
+                            </div>
+
+                            <div class="available-hover" *ngIf="!getBookingForCell(room.id, slot.hour)">
+                                Bisa dipesan
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

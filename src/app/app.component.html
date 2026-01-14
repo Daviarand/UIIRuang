@@ -1,0 +1,28 @@
+<div class="app-container">
+  <app-header></app-header>
+
+  <!-- Breadcrumb Area - di luar sidebar dan content -->
+  <div class="breadcrumb-area">
+    <div class="breadcrumb">
+      <a href="/" class="breadcrumb-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </svg>
+      </a>
+      <span class="breadcrumb-separator">></span>
+      <a href="/peminjaman" class="breadcrumb-item">UIIRuang</a>
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">Peminjaman</span>
+    </div>
+  </div>
+
+  <div class="app-body">
+    <app-sidebar></app-sidebar>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <app-footer></app-footer>
+</div>

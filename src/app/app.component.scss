@@ -1,0 +1,57 @@
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-gray);
+}
+
+// Breadcrumb Area - background putih full width dengan padding
+.breadcrumb-area {
+    background-color: var(--bg-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-top: var(--header-height);
+    border-bottom: 1px solid #e0e0e0;
+
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+
+        .breadcrumb-item {
+            color: var(--text-secondary);
+
+            &:hover {
+                color: var(--primary-blue);
+            }
+
+            svg {
+                vertical-align: middle;
+            }
+        }
+
+        .breadcrumb-separator {
+            color: var(--text-muted);
+        }
+
+        .breadcrumb-current {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+    }
+}
+
+.app-body {
+    display: flex;
+    flex: 1;
+    padding-bottom: var(--footer-height);
+    background-color: var(--bg-gray);
+}
+
+.main-content {
+    flex: 1;
+    background-color: var(--bg-gray);
+    min-height: calc(100vh - var(--header-height) - var(--footer-height) - 60px);
+    overflow-y: auto;
+    padding-top: var(--spacing-md);
+}

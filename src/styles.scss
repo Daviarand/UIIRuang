@@ -1,0 +1,298 @@
+// ============================================
+// UII Ruang - Global Styles & Design Tokens
+// ============================================
+
+// === Design Tokens (Variables) ===
+:root {
+  // Colors - Primary
+  --primary-blue: #1e3a8a;
+  --primary-blue-dark: #1e2a5a;
+  --primary-blue-light: #3b5998;
+  
+  // Colors - Secondary
+  --secondary-gold: #d4af37;
+  
+  // Colors - Background
+  --bg-gray: #eeeeee;
+  --bg-white: #ffffff;
+  --bg-dark: #1e3a8a;
+  
+  // Colors - Text
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+  --text-white: #ffffff;
+  --text-blue: #1e3a8a;
+  
+  // Colors - Status
+  --status-pending: #ffc107;
+  --status-approved: #1e3a8a;
+  --status-rejected: #dc3545;
+  --status-available: #28a745;
+  
+  // Spacing
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  
+  // Border Radius
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  
+  // Shadows
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+  // Typography
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+  
+  // Layout
+  --header-height: 60px;
+  --sidebar-width: 220px;
+  --footer-height: 50px;
+}
+
+// === CSS Reset & Base Styles ===
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  color: var(--text-primary);
+  background-color: var(--bg-gray);
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+// === Utility Classes ===
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.font-bold { font-weight: 600; }
+.text-blue { color: var(--text-blue); }
+.text-muted { color: var(--text-muted); }
+
+// === Card Component ===
+.card {
+  background: var(--bg-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+// === Button Component ===
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  transition: all 0.2s ease;
+  
+  &.btn-primary {
+    background-color: var(--primary-blue);
+    color: var(--text-white);
+    
+    &:hover {
+      background-color: var(--primary-blue-dark);
+    }
+  }
+  
+  &.btn-secondary {
+    background-color: var(--bg-white);
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+    
+    &:hover {
+      background-color: var(--primary-blue);
+      color: var(--text-white);
+    }
+  }
+  
+  &.btn-icon {
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+  }
+}
+
+// === Toggle Button Group ===
+.btn-toggle-group {
+  display: inline-flex;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--primary-blue);
+  
+  .btn-toggle {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-white);
+    color: var(--primary-blue);
+    border: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    transition: all 0.2s ease;
+    
+    &.active {
+      background: var(--primary-blue);
+      color: var(--text-white);
+    }
+    
+    &:hover:not(.active) {
+      background: rgba(30, 58, 138, 0.1);
+    }
+  }
+}
+
+// === Input & Search ===
+.input-group {
+  display: flex;
+  align-items: center;
+  
+  .form-input {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid #ddd;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    font-size: var(--font-size-sm);
+    outline: none;
+    
+    &:focus {
+      border-color: var(--primary-blue);
+    }
+  }
+  
+  .btn-search {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--primary-blue);
+    color: var(--text-white);
+    border: none;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    cursor: pointer;
+    
+    &:hover {
+      background: var(--primary-blue-dark);
+    }
+  }
+}
+
+// === Select Dropdown ===
+.form-select {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid #ddd;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  background: var(--bg-white);
+  cursor: pointer;
+  outline: none;
+  
+  &:focus {
+    border-color: var(--primary-blue);
+  }
+}
+
+// === Table ===
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-white);
+  
+  th, td {
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  th {
+    background: var(--primary-blue);
+    color: var(--text-white);
+    font-weight: 600;
+  }
+  
+  tr:hover td {
+    background: rgba(30, 58, 138, 0.05);
+  }
+}

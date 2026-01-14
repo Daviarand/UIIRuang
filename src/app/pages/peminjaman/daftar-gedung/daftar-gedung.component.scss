@@ -1,0 +1,145 @@
+.page-content {
+    padding: var(--spacing-md);
+}
+
+// Content Card
+.content-card {
+    background: var(--bg-white);
+    border-radius: 5px;
+    padding: var(--spacing-lg);
+}
+
+.page-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+// Yellow underline like in the design - full width
+.title-underline {
+    height: 3px;
+    background: #ffc107;
+    margin-bottom: var(--spacing-lg);
+}
+
+// Controls Row
+.controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+
+    .left-controls {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+}
+
+// Filter Row
+.filter-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+
+    .filter-left {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+
+        .data-info {
+            color: var(--text-muted);
+        }
+    }
+
+    .filter-right {
+        .form-input {
+            width: 200px;
+        }
+    }
+}
+
+// Grid View
+.gedung-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.gedung-card {
+    background: var(--bg-white);
+    border: 1px solid #e0e0e0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    .gedung-image {
+        width: 100%;
+        height: 180px;
+        overflow: hidden;
+        background-color: #f5f5f5;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .gedung-info {
+        padding: var(--spacing-md);
+    }
+
+    .gedung-name {
+        font-size: var(--font-size-md);
+        font-weight: 600;
+        color: var(--primary-blue);
+        margin-bottom: var(--spacing-sm);
+        line-height: 1.3;
+    }
+
+    .gedung-detail {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-xs);
+
+        svg {
+            flex-shrink: 0;
+        }
+    }
+}
+
+// Table View
+.gedung-table-wrapper {
+    overflow-x: auto;
+
+    .table {
+        min-width: 700px;
+    }
+
+    .btn-sm {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xs);
+    }
+}
