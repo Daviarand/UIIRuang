@@ -292,8 +292,11 @@
             border: 1px solid #333;
             color: #333;
 
+            border: 1px solid #0d2b78;
+            color: #0d2b78;
+
             &:hover {
-                background: #f5f5f5;
+                background: #f0f7fc;
             }
         }
 
@@ -332,6 +335,8 @@
     text-align: center;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     position: relative;
+    border-top: 6px solid #0d2b78;
+    overflow: hidden; // Ensure rounded corners work with border
 }
 
 .modal-icon {
@@ -373,4 +378,33 @@
     display: flex;
     justify-content: center;
     gap: 16px;
+
+    .btn {
+        padding: 10px 24px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .btn-outline {
+        background: white;
+        border: 1px solid #0d2b78;
+        color: #0d2b78;
+
+        &:hover {
+            background: #f0f7fc;
+        }
+    }
+
+    .btn-primary {
+        background: #0d2b78;
+        border: 1px solid #0d2b78;
+        color: white;
+
+        &:hover {
+            background: #0a2260;
+        }
+    }
 }
