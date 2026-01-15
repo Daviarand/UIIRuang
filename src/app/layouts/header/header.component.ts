@@ -47,10 +47,11 @@ export class HeaderComponent implements OnInit {
     // Navigate based on role
     if (role === 'admin') {
       this.router.navigate(['/verifikator']);
+    } else if (role === 'mahasiswa') {
+      this.router.navigate(['/peminjaman']);
     } else {
-      // Create logic to navigate to relevant pages
-      // For now, go home/daftar-gedung
-      this.router.navigate(['/peminjaman/daftar-gedung']);
+      // Tendik/Dosen default
+      this.router.navigate(['/peminjaman']);
     }
   }
 
