@@ -1,27 +1,52 @@
-# UiiRuang
+# UII Ruang - Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+Project frontend untuk sistem peminjaman ruang menggunakan Angular 17.
 
-## Development server
+## Prasyarat
+- Node.js (v18 atau lebih baru)
+- Angular CLI v17 (`npm install -g @angular/cli`)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Cara Menjalankan
 
-## Code scaffolding
+1.  **Install Dependencies**
+    Masuk ke folder project dan jalankan perintah:
+    ```bash
+    npm install
+    ```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2.  **Jalankan Server Development**
+    ```bash
+    npm start
+    ```
+    atau
+    ```bash
+    ng serve
+    ```
 
-## Build
+3.  **Buka Aplikasi**
+    Buka browser dan akses: [http://localhost:4200](http://localhost:4200)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Fitur Role Switching (Simulasi)
 
-## Running unit tests
+Project ini memiliki fitur simulasi ganti multi-role tanpa login ulang.
+Klik **Icon Profil** di pojok kanan atas header untuk mengganti role:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+*   **Mahasiswa** (Default)
+    *   Hanya bisa melihat Daftar Gedung & Ketersediaan Ruang.
+    *   Tidak bisa melakukan booking (klik slot jadwal dinonaktifkan).
+    *   Menu Sidebar terbatas.
 
-## Running end-to-end tests
+*   **Tendik/Dosen**
+    *   Akses penuh ke Form Peminjaman.
+    *   Bisa klik slot kosong di jadwal untuk booking.
+    *   Menu "Kelola Peminjaman" aktif.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+*   **Admin Verifikator**
+    *   Akses ke modul khusus Verifikator.
+    *   Bisa memverifikasi (Terima/Tolak) pengajuan peminjaman.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Struktur Project
+*   `src/app/pages/peminjaman`: Modul utama (Daftar Gedung, Jadwal, Form).
+*   `src/app/pages/kelola-peminjaman`: Modul pengelola (List Peminjaman, Detail, Pembayaran).
+*   `src/app/pages/verifikator`: Modul admin verifikasi.
+*   `src/assets/styles`: Global styles & SCSS styling.
