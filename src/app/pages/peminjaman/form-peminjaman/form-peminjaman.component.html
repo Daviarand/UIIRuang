@@ -1,6 +1,6 @@
 <div class="page-content">
     <div class="content-card">
-        <h1 class="page-title">Pinjam ruang</h1>
+        <h1 class="page-title">{{ bookingId > 0 ? 'Ubah peminjaman' : 'Pinjam ruang' }}</h1>
         <div class="title-underline"></div>
 
         <!-- Detail Ruangan Section (Above Tabs) -->
@@ -177,30 +177,66 @@
                 </div>
 
                 <!-- File Upload -->
-                <div class="form-group">
-                    <label>Dokumen pendukung</label>
-                    <div class="upload-section">
-                        <div class="upload-area" *ngIf="!uploadedFileName">
-                            <input type="file" id="fileUpload" class="file-input"
-                                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" (change)="onFileSelected($event)">
-                            <label for="fileUpload" class="upload-label">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="currentColor">
-                                    <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
-                                </svg>
-                                <span class="upload-text">Upload</span>
-                            </label>
-                            <p class="upload-hint">File Maks 10mb<br>Format jpg/jpeg/png/pdf</p>
-                        </div>
-
-                        <div class="uploaded-file" *ngIf="uploadedFileName">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <path
-                                    d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+                <!-- File Upload with Accordion Style -->
+                <div class="form-group-section" style="margin-bottom:var(--spacing-md);">
+                    <div class="accordion-item">
+                        <div class="accordion-header" [class.active]="isDokumenExpanded"
+                            (click)="isDokumenExpanded = !isDokumenExpanded">
+                            <span>Dokumen pendukung</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="white" style="transition: transform 0.2s;"
+                                [style.transform]="isDokumenExpanded ? 'rotate(180deg)' : 'rotate(0deg)'">
+                                <path d="M7 10l5 5 5-5z" />
                             </svg>
-                            <span>{{ uploadedFileName }}</span>
-                            <button type="button" class="btn-remove" (click)="removeFile()">×</button>
+                        </div>
+                        <div class="accordion-content" *ngIf="isDokumenExpanded">
+                            <div class="upload-area" *ngIf="!uploadedFileName"
+                                style="border: 1px solid #ddd; border-top:none;">
+                                <input type="file" id="fileUpload" class="file-input"
+                                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" (change)="onFileSelected($event)">
+                                <label for="fileUpload" class="upload-btn-styled">
+                                    Upload
+                                </label>
+                                <p class="upload-hint">Max 500KB<br>Format jpg/jpeg/png/pdf</p>
+                            </div>
+
+                            <!-- Uploaded File Display -->
+                            <!-- Uploaded File Display -->
+                            <div *ngIf="uploadedFileName">
+                                <!-- Image Preview (Full Width with negative margins to overlap padding) -->
+                                <div class="image-preview-container" *ngIf="uploadedFileUrl"
+                                    style="position: relative; margin-left: -20px; margin-right: -20px; width: calc(100% + 40px); border-bottom: 1px solid #ddd; background: #e9ecef;">
+                                    <img [src]="uploadedFileUrl" alt="Preview"
+                                        style="display: block; width: 100%; height: auto;">
+
+                                    <!-- Close Button (Top Right) -->
+                                    <button type="button" class="btn-remove-preview" (click)="removeFile()"
+                                        style="position: absolute; top: 10px; right: 10px; background: #666; color: white; border: none; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; border-radius: 4px; transition: background 0.2s;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <!-- Standard File Display (if not image or no preview) -->
+                                <div class="uploaded-file" *ngIf="!uploadedFileUrl">
+                                    <div class="file-info-row"
+                                        style="display: flex; align-items: center; gap: 8px; width: 100%;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+                                        </svg>
+                                        <span>{{ uploadedFileName }}</span>
+                                        <button type="button" class="btn-remove" (click)="removeFile()"
+                                            style="margin-left: auto; background: none; border: none; font-size: 20px; cursor: pointer;">×</button>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -271,7 +307,8 @@
             <!-- Action Buttons -->
             <div class="form-actions">
                 <button type="button" class="btn btn-secondary" (click)="onBatal()">Batal</button>
-                <button type="button" class="btn btn-primary" (click)="onSubmit()">Pinjam ruang</button>
+                <button type="button" class="btn btn-primary" (click)="onSubmit()">{{ bookingId > 0 ? 'Simpan Perubahan'
+                    : 'Pinjam ruang' }}</button>
             </div>
         </div>
 
@@ -416,7 +453,8 @@
 
             <div class="form-actions">
                 <button type="button" class="btn btn-secondary" (click)="onBatal()">Batal</button>
-                <button type="button" class="btn btn-primary" (click)="onSubmit()">Pinjam ruang</button>
+                <button type="button" class="btn btn-primary" (click)="onSubmit()">{{ bookingId > 0 ? 'Simpan Perubahan'
+                    : 'Pinjam ruang' }}</button>
             </div>
         </div>
     </div>
@@ -425,17 +463,18 @@
 <!-- Confirmation Modal -->
 <div class="modal-overlay" *ngIf="showConfirmModal" (click)="onCancelConfirm()">
     <div class="modal-content" (click)="$event.stopPropagation()">
+        <!-- Yellow Question Mark Icon -->
         <div class="modal-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
-            </svg>
+            <div class="icon-circle">
+                <span class="question-mark">?</span>
+            </div>
         </div>
 
-        <h2 class="modal-title">Apakah Anda yakin data pengajuan sudah benar</h2>
+        <h2 class="modal-title">{{ bookingId > 0 ? 'Simpan pembaharuan dokumen?' : 'Apakah Anda yakin data pengajuan
+            sudah benar?' }}</h2>
         <p class="modal-subtitle">Periksa kembali apabila Anda belum yakin data sudah benar</p>
 
-        <div class="modal-info">
+        <div class="modal-info" *ngIf="bookingId === 0">
             <div class="info-row">
                 <span class="info-label">Tarif peminjaman</span>
                 <span class="info-value">: {{ formatRupiah(tarifPerJam) }}/jam</span>
@@ -451,7 +490,7 @@
         </div>
 
         <div class="modal-actions">
-            <button type="button" class="btn btn-secondary" (click)="onCancelConfirm()">Kembali</button>
+            <button type="button" class="btn btn-outline" (click)="onCancelConfirm()">Kembali</button>
             <button type="button" class="btn btn-primary" (click)="onConfirmSubmit()">Ya, saya yakin</button>
         </div>
     </div>

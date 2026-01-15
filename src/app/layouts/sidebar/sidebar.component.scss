@@ -1,16 +1,58 @@
 .sidebar {
     width: var(--sidebar-width);
-    height: 96%;
+    min-height: 100%; // Match main content height
     background-color: var(--bg-white);
     border-right: 1px solid #e0e0e0;
-    padding-top: var(--spacing-md);
-    // margin-top: var(--spacing-md);
-    margin-top: 32px;
+    // padding-top: var(--spacing-md);
+    margin-top: 28px;
     margin-left: 18px;
-    // border-radius: 5px;
     flex-shrink: 0;
-    align-self: stretch;
+    align-self: stretch; // Stretch to fill parent
+    transition: transform 0.3s ease;
+    z-index: 1001;
 }
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+.sidebar-mobile-header {
+    display: none;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: #f5f5f5; // Grey header background just like reference image seems to imply or maybe blue?
+    // Referencing image 1: Top bar is greyish (or white).
+    // Referencing image 2: The sidebar itself is white, but has a strong blue header?
+    // Wait, Image 2 has a top bar with "Back" and "Logo" on a GREY background? No, it looks like the main UII header but inside the sidebar?
+    // Let's assume it's a dedicated header inside sidebar.
+    border-bottom: 1px solid #ddd;
+    gap: var(--spacing-md);
+
+    .back-btn {
+        background: var(--primary-blue); // Blue circle?
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .mobile-logo {
+        height: 40px;
+    }
+}
+
 
 .sidebar-nav {
     display: flex;
@@ -44,5 +86,35 @@
         svg {
             stroke: var(--text-white);
         }
+    }
+}
+
+// Mobile Responsive
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 280px; // Standard mobile drawer width
+        margin: 0;
+        padding-top: 0; // Header takes care of padding
+        transform: translateX(-100%);
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+
+        &.open {
+            transform: translateX(0);
+        }
+    }
+
+    .sidebar-overlay {
+        display: block; // Visible only when open logic is handled by *ngIf in HTML
+        // Actually, I put *ngIf="isOpen" on the overlay div in HTML, so no duplicate logic needed here.
+    }
+
+    .sidebar-mobile-header {
+        display: flex;
+        background-color: #f0f0f0; // Light grey top section
+        justify-content: flex-start;
     }
 }

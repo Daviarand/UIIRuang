@@ -5,64 +5,33 @@
     background-color: var(--bg-gray);
 }
 
-// Breadcrumb Area - background putih full width
-.breadcrumb-area {
-    background-color: var(--bg-white);
-    padding: 12px var(--spacing-lg); // Decreased vertical padding slightly
-    margin-top: 80px;
-    border-bottom: 1px solid #e0e0e0;
-
-    .breadcrumb {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-sm);
-        font-size: 14px;
-    }
-
-    .breadcrumb-home {
-        color: var(--text-secondary);
-        display: flex;
-        align-items: center;
-
-        &:hover {
-            color: var(--primary-blue);
-        }
-
-        svg {
-            vertical-align: middle;
-        }
-    }
-
-    .breadcrumb-separator {
-        color: var(--text-muted);
-        font-size: var(--font-size-xs);
-    }
-
-    .breadcrumb-link {
-        color: var(--text-secondary);
-
-        &:hover {
-            color: var(--primary-blue);
-            text-decoration: underline;
-        }
-    }
-
-    .breadcrumb-current {
-        color: var(--text-primary);
-        font-weight: 500;
-    }
-}
-
 .app-body {
     display: flex;
     flex: 1;
     background-color: var(--bg-gray);
+    position: relative;
+    margin-top: 110px; // Header (70px) + Breadcrumb (40px)
 }
 
 .main-content {
     flex: 1;
     background-color: var(--bg-gray);
-    min-height: calc(100vh - var(--header-height) - 60px);
+    min-height: calc(100vh - 110px - 60px); // Adjusted for header + breadcrumb + footer
     overflow-y: auto;
     padding-top: var(--spacing-md);
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .app-body {
+        display: block;
+        margin-top: 100px; // Mobile: header (60px) + breadcrumb (40px)
+    }
+
+    .main-content {
+        padding: var(--spacing-sm);
+        padding-top: var(--spacing-md);
+        min-height: calc(100vh - 100px - 60px);
+    }
 }

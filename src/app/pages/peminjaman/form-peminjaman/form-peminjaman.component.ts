@@ -116,6 +116,10 @@ export class FormPeminjamanComponent implements OnInit {
         agreement: false
     };
 
+
+
+    isDokumenExpanded: boolean = true; // Default open as per image implication or user preference
+    uploadedFileUrl: string | ArrayBuffer | null = null;
     uploadedFileName: string = '';
 
     // Dummy rooms data - sesuaikan dengan Gedung KH. Mas Mansyur di scheduler
@@ -204,11 +208,44 @@ export class FormPeminjamanComponent implements OnInit {
         this.route.params.subscribe(params => {
             this.roomId = +params['roomId'] || 0;
             this.timeSlot = +params['timeSlot'] || 0;
+            this.bookingId = +params['bookingId'] || 0;
 
-            this.loadRoomDetails();
-            this.setDefaultDateTime();
+            if (this.bookingId > 0) {
+                this.loadBookingDetails(this.bookingId);
+            } else {
+                this.loadRoomDetails();
+                this.setDefaultDateTime();
+            }
             this.initKetersediaanTimeSlots();
         });
+    }
+
+    bookingId: number = 0;
+
+    loadBookingDetails(id: number): void {
+        // Dummy data for editing (Simulasi data dari database)
+        if (id === 1) {
+            this.roomId = 1; // Ruang Lecture A
+            this.loadRoomDetails();
+
+            this.formData = {
+                instansi: 'internal',
+                namaPenanggungJawab: 'Ahmad Dahlan',
+                noWhatsapp: '081234567890',
+                namaAcara: 'Rapat Koordinasi',
+                jenisAcara: 'Rapat',
+                jumlahPeserta: 25,
+                deskripsiAcara: 'Rapat bulanan',
+                fasilitasTambahan: 'Butuh tambahan 2 microphone',
+                dokumenPendukung: null, // File handling is complex in pure frontend, leave empty
+                tanggalAcara: '2026-05-15',
+                jamMulai: '09:00',
+                jamSelesai: '11:00',
+                agreement: true
+            };
+            this.uploadedFileName = 'Surat1.png';
+            this.uploadedFileUrl = 'assets/images/Surat1.png';
+        }
     }
 
     loadRoomDetails(): void {
@@ -228,6 +265,31 @@ export class FormPeminjamanComponent implements OnInit {
         if (this.timeSlot > 0) {
             this.formData.jamMulai = `${this.timeSlot.toString().padStart(2, '0')}:00`;
             this.formData.jamSelesai = `${(this.timeSlot + 2).toString().padStart(2, '0')}:00`;
+        }
+    }
+
+    onConfirmSubmit(): void {
+        console.log('Form submitted:', this.formData);
+        this.showConfirmModal = false;
+
+        if (this.bookingId > 0) {
+            alert('Perubahan berhasil disimpan!');
+            this.router.navigate(['/kelola-peminjaman']);
+        } else {
+            alert('Pengajuan peminjaman berhasil dikirim!');
+            this.router.navigate(['/peminjaman/jadwal', '1']);
+        }
+    }
+
+    // ... 
+
+    onBatal(): void {
+        if (confirm('Batalkan pengisian form?')) {
+            if (this.bookingId > 0) {
+                this.router.navigate(['/kelola-peminjaman']);
+            } else {
+                this.router.navigate(['/peminjaman/jadwal', '1']);
+            }
         }
     }
 
@@ -290,12 +352,24 @@ export class FormPeminjamanComponent implements OnInit {
 
             this.formData.dokumenPendukung = file;
             this.uploadedFileName = file.name;
+
+            // Generate preview if image
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    this.uploadedFileUrl = reader.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                this.uploadedFileUrl = null; // Reset if not an image
+            }
         }
     }
 
     removeFile(): void {
         this.formData.dokumenPendukung = null;
         this.uploadedFileName = '';
+        this.uploadedFileUrl = null;
     }
 
     validateForm(): boolean {
@@ -381,22 +455,7 @@ export class FormPeminjamanComponent implements OnInit {
         this.showConfirmModal = true;
     }
 
-    onConfirmSubmit(): void {
-        console.log('Form submitted:', this.formData);
-        this.showConfirmModal = false;
-        alert('Pengajuan peminjaman berhasil dikirim!');
-
-        // Navigate back to scheduler
-        this.router.navigate(['/peminjaman/jadwal', '1']);
-    }
-
     onCancelConfirm(): void {
         this.showConfirmModal = false;
-    }
-
-    onBatal(): void {
-        if (confirm('Batalkan pengisian form?')) {
-            this.router.navigate(['/peminjaman/jadwal', '1']);
-        }
     }
 }

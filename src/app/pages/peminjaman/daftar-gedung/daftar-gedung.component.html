@@ -125,5 +125,19 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Pagination (Added for Table View Consistency) -->
+        <div class="pagination" *ngIf="viewMode === 'tabel'">
+            <span>Menampilkan 1-10 dari {{ filteredGedung.length }} data</span>
+            <div class="pagination-controls">
+                <button disabled>|&lt;</button>
+                <button disabled>&lt;</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>&gt;</button>
+                <button>&gt;|</button>
+            </div>
+        </div>
     </div>
 </div>

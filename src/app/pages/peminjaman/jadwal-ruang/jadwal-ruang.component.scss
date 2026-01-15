@@ -1,24 +1,27 @@
 .page-content {
     padding: var(--spacing-md);
+    margin-top: -4px;
 }
 
 .content-card {
     background: var(--bg-white);
     // border-radius: 5px;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md); // Reduced from lg to md
 }
 
 .page-title {
     font-size: 16px; // 14px as requested
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: 8px; // Reduced spacing
 }
 
 .title-underline {
     height: 1px;
     background: #ffc107;
     margin-bottom: var(--spacing-lg);
+    margin-left: calc(var(--spacing-md) * -1);
+    margin-right: calc(var(--spacing-md) * -1);
 }
 
 // Filter Section

@@ -1,0 +1,192 @@
+<div class="detail-container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h2 class="page-title">Detail peminjaman</h2>
+    </div>
+
+    <!-- Detail Ruang Section -->
+    <div class="card-section">
+        <div class="section-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
+            </svg>
+            <span>Detail ruang</span>
+        </div>
+        <div class="info-grid">
+            <span class="info-label">Nama ruang</span>
+            <span class="info-value">{{ detailData?.room.name }}</span>
+
+            <span class="info-label">Unit pemilik ruang</span>
+            <span class="info-value">{{ detailData?.room.unit }}</span>
+
+            <span class="info-label">Gedung</span>
+            <span class="info-value">{{ detailData?.room.building }}</span>
+
+            <span class="info-label">Lantai</span>
+            <span class="info-value">{{ detailData?.room.floor }}</span>
+
+            <span class="info-label">Lokasi</span>
+            <span class="info-value">{{ detailData?.room.location }}</span>
+
+            <span class="info-label">Tautan google maps</span>
+            <span class="info-value"><a [href]="detailData?.room.mapsUrl" target="_blank">{{ detailData?.room.mapsUrl
+                    }}</a></span>
+
+            <span class="info-label">Jenis ruang</span>
+            <span class="info-value">{{ detailData?.room.type }}</span>
+
+            <span class="info-label">Kapasitas</span>
+            <span class="info-value">{{ detailData?.room.capacity }}</span>
+
+            <span class="info-label">Deskripsi ruangan</span>
+            <span class="info-value-full">{{ detailData?.room.description }}</span>
+        </div>
+    </div>
+
+    <!-- Detail Peminjaman Section -->
+    <div class="card-section">
+        <div class="section-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+            </svg>
+            <span>Detail peminjaman</span>
+        </div>
+        <div class="info-grid">
+            <span class="info-label">Instansi</span>
+            <span class="info-value">{{ detailData?.borrower.instansi }}</span>
+
+            <span class="info-label">Nama penanggung jawab</span>
+            <span class="info-value">{{ detailData?.borrower.name }}</span>
+
+            <span class="info-label">Nomor WA</span>
+            <span class="info-value">{{ detailData?.borrower.whatsapp }}</span>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-grid">
+            <span class="info-label">Nama acara</span>
+            <span class="info-value">{{ detailData?.borrower.eventName }}</span>
+
+            <span class="info-label">Jenis acara</span>
+            <span class="info-value">{{ detailData?.borrower.eventType }}</span>
+
+            <span class="info-label">Jumlah peserta</span>
+            <span class="info-value">{{ detailData?.borrower.participants }} peserta</span>
+
+            <span class="info-label">Deskripsi</span>
+            <span class="info-value-full">{{ detailData?.borrower.description }}</span>
+
+            <span class="info-label">Tambahan fasilitas</span>
+            <span class="info-value">{{ detailData?.borrower.facilities }}</span>
+        </div>
+
+        <!-- Dokumen Pendukung Accordion (OPEN by default) -->
+        <div class="accordion-item" *ngIf="detailData?.borrower.documentUrl">
+            <div class="accordion-header" (click)="isDocExpanded = !isDocExpanded">
+                <span>Dokumen pendukung</span>
+                <svg class="accordion-icon" [class.rotate]="isDocExpanded" xmlns="http://www.w3.org/2000/svg" width="16"
+                    height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+            <div class="accordion-content" *ngIf="isDocExpanded">
+                <img [src]="detailData?.borrower.documentUrl" alt="Dokumen Pendukung" class="doc-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- Waktu Acara Section -->
+    <div class="card-section">
+        <div class="section-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+            </svg>
+            <span>Waktu acara</span>
+        </div>
+        <div class="info-grid">
+            <span class="info-label">Hari 1</span>
+            <span class="info-value">{{ detailData?.time.day1 }}</span>
+
+            <span class="info-label">Hari 2</span>
+            <span class="info-value">{{ detailData?.time.day2 }}</span>
+        </div>
+    </div>
+
+    <!-- Riwayat Status Section -->
+    <div class="card-section">
+        <div class="section-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M13 3a9 9 0 0 0-9 9H1l3.96 4.03L9 12H6a7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" />
+            </svg>
+            <span>Riwayat status</span>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item" *ngFor="let history of detailData?.history; let i = index">
+                <div class="timeline-dot" [class.first]="i === 0" [class.active]="history.active"></div>
+                <div class="timeline-date">{{ history.date }}</div>
+                <div class="timeline-status" [class.highlight]="i === 0">{{ history.status }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Pembayaran Section (Conditional) -->
+    <div class="card-section" *ngIf="detailData?.payment.isPaid">
+        <div class="section-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+            </svg>
+            <span>Detail pembayaran</span>
+        </div>
+        <div class="info-grid">
+            <span class="info-label">Nama bank</span>
+            <span class="info-value">{{ detailData?.payment.bankName }}</span>
+
+            <span class="info-label">Nomor rekening</span>
+            <span class="info-value">{{ detailData?.payment.accountNumber }}</span>
+
+            <span class="info-label">Tarif ruangan</span>
+            <span class="info-value">{{ detailData?.payment.rate }}</span>
+
+            <span class="info-label">Durasi peminjaman</span>
+            <span class="info-value">{{ detailData?.payment.duration }}</span>
+
+            <span class="info-label">Total pembayaran</span>
+            <span class="info-value" style="font-weight: 700;">{{ detailData?.payment.total }}</span>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-grid">
+            <span class="info-label">Nama pengirim</span>
+            <span class="info-value">{{ detailData?.payment.senderName }}</span>
+
+            <span class="info-label">Nama bank</span>
+            <span class="info-value">{{ detailData?.payment.senderBank }}</span>
+        </div>
+
+        <!-- Bukti Pembayaran Accordion (OPEN by default) -->
+        <div class="accordion-item" *ngIf="detailData?.payment.proofUrl">
+            <div class="accordion-header" (click)="isProofExpanded = !isProofExpanded">
+                <span>Bukti pembayaran</span>
+                <svg class="accordion-icon" [class.rotate]="isProofExpanded" xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+            <div class="accordion-content" *ngIf="isProofExpanded">
+                <img [src]="detailData?.payment.proofUrl" alt="Bukti Pembayaran" class="doc-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button class="btn-back" (click)="onBack()">Kembali</button>
+    </div>
+</div>

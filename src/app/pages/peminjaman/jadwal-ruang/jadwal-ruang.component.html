@@ -122,7 +122,8 @@
                                     </div>
                                 </div>
 
-                                <div class="available-hover" *ngIf="!getBookingForCell(room.id, slot.hour)">
+                                <div class="available-hover"
+                                    *ngIf="!getBookingForCell(room.id, slot.hour) && currentRole !== 'mahasiswa'">
                                     Bisa dipesan
                                 </div>
                             </td>

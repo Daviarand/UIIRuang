@@ -1,0 +1,229 @@
+// Detail Peminjaman Page - Standardized Styling Shared
+// This file is shared between kelola-peminjaman and verifikator detail pages
+
+:host {
+    display: block;
+    background-color: #ffffff;
+    // Removed min-height: 100% to fix nested scrollbar issue
+}
+
+.detail-container {
+    width: 100%;
+    font-family: var(--font-family, 'Roboto', sans-serif);
+    color: var(--text-primary, #333);
+    background-color: #ffffff;
+    padding: var(--spacing-md, 16px);
+    margin-top: 12px; // Match other pages
+    font-size: var(--font-size-base, 14px);
+}
+
+// Page Header with Yellow Underline
+.page-header {
+    margin-bottom: var(--spacing-lg, 24px);
+    border-bottom: 2px solid #ffc107;
+    margin-left: calc(var(--spacing-md, 16px) * -1);
+    margin-right: calc(var(--spacing-md, 16px) * -1);
+    padding-left: var(--spacing-md, 16px);
+    padding-right: var(--spacing-md, 16px);
+    padding-bottom: 8px;
+
+    .page-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-primary, #0d2b78);
+        margin: 0;
+    }
+}
+
+// Section Card
+.card-section {
+    background: #f0f7fc; // Lighter soft blue
+    border-radius: 4px;
+    margin-bottom: var(--spacing-md, 16px);
+    padding: var(--spacing-md, 16px);
+    border: 1px solid #e5eff8;
+
+    .section-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        color: #0d2b78;
+        font-size: 14px;
+        font-weight: 700;
+
+        svg,
+        i {
+            color: #0d2b78;
+            fill: #0d2b78;
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+// Info Grid
+.info-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 6px 12px;
+    font-size: 13px;
+
+    .info-label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .info-value {
+        color: #333;
+
+        &::before {
+            content: ': ';
+        }
+    }
+
+    .info-value-full {
+        grid-column: 1 / -1;
+        margin-top: 4px;
+        text-align: justify;
+        line-height: 1.5;
+
+        &::before {
+            content: ': ';
+        }
+    }
+}
+
+.section-divider {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 12px 0;
+}
+
+// Accordion (Only for Dokumen & Bukti)
+.accordion-item {
+    margin-top: 16px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #ddd;
+
+    .accordion-header {
+        background: #0d2b78;
+        color: white;
+        padding: 10px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 13px;
+
+        .accordion-icon {
+            transition: transform 0.3s;
+
+            &.rotate {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .accordion-content {
+        padding: 16px;
+        background: #f9f9f9;
+        display: flex;
+        justify-content: center;
+
+        .doc-image {
+            max-width: 400px; // Smaller image size
+            max-height: 500px;
+            width: auto;
+            height: auto;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+// Timeline
+.timeline {
+    position: relative;
+    padding-left: 24px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 8px;
+        bottom: 8px;
+        left: 8px;
+        width: 2px;
+        background: #f0ad4e;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding-bottom: 16px;
+        padding-left: 16px;
+
+        &:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -20px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #f0ad4e;
+            border: 2px solid white;
+            z-index: 1;
+
+            &.active,
+            &.first {
+                background: #3498db;
+            }
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .timeline-status {
+            font-size: 13px;
+            color: #555;
+
+            &.highlight {
+                color: #3498db;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+// Action Buttons
+.action-buttons {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+
+    .btn-back {
+        background: white;
+        border: 1px solid #0d2b78;
+        color: #0d2b78;
+        padding: 8px 32px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+            background: #e8f4fc;
+        }
+    }
+}

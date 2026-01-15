@@ -9,7 +9,8 @@ import { FormPeminjamanComponent } from './form-peminjaman/form-peminjaman.compo
 const routes: Routes = [
     { path: '', component: DaftarGedungComponent },
     { path: 'jadwal/:gedungId', component: JadwalRuangComponent },
-    { path: 'form/:roomId/:timeSlot', component: FormPeminjamanComponent }
+    { path: 'form/:roomId/:timeSlot', component: FormPeminjamanComponent },
+    { path: 'edit/:bookingId', component: FormPeminjamanComponent }
 ];
 
 @NgModule({
@@ -22,6 +23,9 @@ const routes: Routes = [
         CommonModule,
         FormsModule,
         RouterModule.forChild(routes)
+    ],
+    exports: [
+        FormPeminjamanComponent
     ]
 })
 export class PeminjamanModule { }

@@ -1,0 +1,222 @@
+<div class="page-content">
+    <div class="content-card">
+        <h1 class="page-title">Daftar peminjaman</h1>
+        <div class="title-underline"></div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card grey">
+                <div class="stat-content">
+                    <div class="stat-label">Semua</div>
+                    <div class="stat-value">{{ totalPengajuan }} pengajuan</div>
+                </div>
+                <div class="stat-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="stat-card blue">
+                <div class="stat-content">
+                    <div class="stat-label">Diajukan</div>
+                    <div class="stat-value">{{ countDiajukan }} pengajuan</div>
+                </div>
+                <div class="stat-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="stat-card teal">
+                <div class="stat-content">
+                    <div class="stat-label">Disetujui</div>
+                    <div class="stat-value">{{ countDisetujui }} pengajuan</div>
+                </div>
+                <div class="stat-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                        <polyline points="9 16 11 18 15 14"></polyline>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="stat-card red">
+                <div class="stat-content">
+                    <div class="stat-label">Ditolak</div>
+                    <div class="stat-value">{{ countDitolak }} pengajuan</div>
+                </div>
+                <div class="stat-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Status Bayar -->
+        <div class="status-tabs">
+            <div class="tab-item" [class.active]="selectedStatusBayar === 'Tidak berbayar'"
+                (click)="setStatusBayarFilter('Tidak berbayar')">
+                <span class="tab-label">Tidak berbayar</span>
+                <span class="tab-badge">{{ countTidakBerbayar }}</span>
+            </div>
+            <div class="tab-item" [class.active]="selectedStatusBayar === 'Menunggu Konfirmasi'"
+                (click)="setStatusBayarFilter('Menunggu Konfirmasi')">
+                <span class="tab-label">Menunggu Konfirmasi</span>
+                <span class="tab-badge">{{ countMenungguKonfirmasi }}</span>
+            </div>
+            <div class="tab-item" [class.active]="selectedStatusBayar === 'Belum bayar'"
+                (click)="setStatusBayarFilter('Belum bayar')">
+                <span class="tab-label">Belum bayar</span>
+                <span class="tab-badge">{{ countBelumBayar }}</span>
+            </div>
+            <div class="tab-item" [class.active]="selectedStatusBayar === 'Sudah bayar'"
+                (click)="setStatusBayarFilter('Sudah bayar')">
+                <span class="tab-label">Sudah bayar</span>
+                <span class="tab-badge">{{ countSudahBayar }}</span>
+            </div>
+        </div>
+
+        <!-- Table Controls -->
+        <div class="table-controls">
+            <div class="left-controls">
+                <span>Tampilkan</span>
+                <select class="form-select items-per-page" [(ngModel)]="itemsPerPage">
+                    <option [value]="10">10</option>
+                    <option [value]="25">25</option>
+                    <option [value]="50">50</option>
+                </select>
+                <span>data | Total {{ filteredData.length }} data</span>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Cari" [(ngModel)]="searchQuery">
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Nama ruang</th>
+                    <th>Nama acara</th>
+                    <th>Waktu acara</th>
+                    <th>Status pinjam</th>
+                    <th>Status bayar</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of filteredData; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.namaRuang }}</td>
+                    <td>{{ item.namaAcara }}</td>
+                    <td style="white-space: pre-line;">{{ item.waktuDetail }}</td>
+                    <td>
+                        <span class="status-badge" [class.diajukan]="item.statusPengajuan === 'Diajukan'"
+                            [class.disetujui]="item.statusPengajuan === 'Disetujui'"
+                            [class.ditolak]="item.statusPengajuan === 'Ditolak'">
+                            {{ item.statusPengajuan }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="payment-badge" *ngIf="item.statusBayar"
+                            [class.belum-bayar]="item.statusBayar === 'Belum bayar'"
+                            [class.sudah-bayar]="item.statusBayar === 'Sudah bayar'"
+                            [class.menunggu]="item.statusBayar === 'Menunggu Konfirmasi'"
+                            [class.tidak-berbayar]="item.statusBayar === 'Tidak berbayar'">
+                            {{ item.statusBayar }}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <!-- Detail -->
+                            <button class="btn-icon view" title="Detail"
+                                [routerLink]="['/verifikator/detail', item.id]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+
+                            <!-- Persetujuan (Only if Diajukan) -->
+                            <button class="btn-icon edit" title="Persetujuan"
+                                *ngIf="item.statusPengajuan === 'Diajukan'"
+                                [routerLink]="['/verifikator/verifikasi', item.id]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z">
+                                    </path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <path d="M9 15l2 2 4-4"></path>
+                                </svg>
+                            </button>
+
+                            <!-- Cetak (Only if Disetujui + Sudah bayar/Tidak berbayar) -->
+                            <button class="btn-icon print" title="Cetak"
+                                *ngIf="item.statusPengajuan === 'Disetujui' && (item.statusBayar === 'Sudah bayar' || item.statusBayar === 'Tidak berbayar')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                                    <path
+                                        d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2">
+                                    </path>
+                                    <rect x="6" y="14" width="12" height="8"></rect>
+                                </svg>
+                            </button>
+
+                            <!-- Konfirmasi Bayar (Only if Menunggu Konfirmasi) -->
+                            <button class="btn-icon edit" title="Konfirmasi Pembayaran"
+                                *ngIf="item.statusBayar === 'Menunggu Konfirmasi'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M9 11l3 3L22 4"></path>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <span>Menampilkan 1-10 dari {{ filteredData.length }} data</span>
+            <div class="pagination-controls">
+                <button disabled>|&lt;</button>
+                <button disabled>&lt;</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>&gt;</button>
+                <button>&gt;|</button>
+            </div>
+        </div>
+    </div>
+</div>

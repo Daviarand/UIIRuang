@@ -1,0 +1,464 @@
+.page-content {
+    padding: var(--spacing-md);
+    background-color: var(--bg-gray);
+    margin-top: -4px;
+    min-height: 100%;
+}
+
+.content-card {
+    background: var(--bg-white);
+    // border-radius: 5px;
+    padding: var(--spacing-md); // Follows layout consistency
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+// Yellow underline full width
+.title-underline {
+    height: 1px;
+    background: #ffc107;
+    margin-bottom: var(--spacing-lg);
+    margin-left: calc(var(--spacing-md) * -1); // Extend left
+    margin-right: calc(var(--spacing-md) * -1); // Extend right
+}
+
+// Stats Grid
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.stat-card {
+    // border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    min-height: 100px;
+
+    &.grey {
+        background-color: #aebfd2;
+    }
+
+    &.blue {
+        background-color: #009ef7;
+    }
+
+    &.teal {
+        background-color: #00cdc4;
+    }
+
+    // Mockup teal
+    &.red {
+        background-color: #f1416c;
+    }
+
+    .stat-content {
+        .stat-label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+    }
+
+    .stat-icon {
+        opacity: 0.8;
+
+        svg {
+            width: 64px; // Much larger icon
+            height: 64px;
+        }
+    }
+}
+
+// Status Tabs
+.status-tabs {
+    display: flex;
+    gap: 0; // Remove gap, use border separators
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid #1abc9c; // Teal border similar to reference
+    border-radius: 4px;
+    padding: 0; // Remove padding
+    width: fit-content;
+    overflow: hidden; // Clip corners
+
+    .tab-item {
+        padding: var(--spacing-md) var(--spacing-lg);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-right: 1px solid #eee;
+        transition: all 0.2s;
+        background: white;
+
+        &:last-child {
+            border-right: none;
+        }
+
+        &:hover {
+            background-color: #f8f9fa;
+        }
+
+        &.active {
+            font-weight: 600;
+            background-color: #e6fffa; // Very light teal bg for active
+            color: #000; // Text black as per image? Or keep blue? Reference looks black/dark.
+        }
+
+        .tab-label {
+            font-size: 13px;
+            color: #444;
+        }
+
+        .tab-badge {
+            font-size: 11px;
+            font-weight: 700;
+            color: #666;
+            background-color: #e0e0e0; // Grey circle background
+            border-radius: 12px; // Pill/Circle shape
+            padding: 2px 8px;
+            min-width: 20px;
+            text-align: center;
+            display: inline-block;
+        }
+    }
+}
+
+// Table Controls
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+
+    .left-controls {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        font-size: 13px;
+        color: var(--text-secondary);
+
+        .items-per-page {
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    }
+
+    .search-box {
+        display: flex;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+
+        input {
+            border: none;
+            padding: 6px 12px;
+            font-size: 13px;
+            outline: none;
+            width: 200px;
+        }
+
+        button {
+            border: none;
+            background: var(--primary-blue);
+            color: white;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    }
+}
+
+// Table
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+
+    th {
+        text-align: left;
+        padding: var(--spacing-sm);
+        border-bottom: 2px solid #eee;
+        color: #333;
+        font-weight: 600;
+    }
+
+    td {
+        padding: var(--spacing-sm);
+        border-bottom: 1px solid #eee;
+        color: #555;
+        vertical-align: middle;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f0f4ff;
+    }
+}
+
+// Badges
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 4px; // Mockup is rectangular-ish
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    display: inline-block;
+    min-width: 130px;
+    text-align: center;
+
+    &.diajukan {
+        background-color: #007bff;
+    }
+
+    &.disetujui {
+        background-color: #20c997;
+    }
+
+    // Teal
+    &.ditolak {
+        background-color: #dc3545;
+    }
+}
+
+.payment-badge {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    border: 1px solid;
+    display: inline-block;
+    min-width: 130px;
+    text-align: center;
+
+    &.belum-bayar {
+        border-color: #dc3545;
+        color: #dc3545;
+        background-color: #fff;
+    }
+
+    &.sudah-bayar {
+        border-color: #28a745;
+        color: #28a745;
+        background-color: #fff;
+    }
+
+    &.menunggu {
+        border-color: #ffc107;
+        color: #ffc107;
+        background-color: #fff;
+    }
+
+    &.tidak-berbayar {
+        border-color: #17a2b8;
+        color: #17a2b8; // Info blue
+        background-color: #fff;
+    }
+}
+
+// Action Buttons
+.action-buttons {
+    display: flex;
+    gap: 8px;
+
+    .btn-icon {
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        color: var(--primary-blue);
+        padding: 2px;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        // Eye icon - blue outline
+        &.view {
+            color: #0d2b78;
+        }
+
+        // Pencil icon - blue solid
+        &.edit {
+            color: #0d2b78;
+        }
+
+        // X icon - red
+        &.cancel {
+            color: #dc3545;
+        }
+
+        &.print {
+            color: #0d2b78;
+        }
+
+        &.payment {
+            color: #0d2b78;
+        }
+    }
+}
+
+// Pagination
+.pagination {
+    display: flex;
+    justify-content: center; // Center controls
+    align-items: center;
+    margin-top: var(--spacing-lg);
+    font-size: 13px;
+    color: var(--text-secondary);
+    position: relative; // For absolute positioning of info text
+
+    >span {
+        position: absolute;
+        left: 0;
+    }
+
+    .pagination-controls {
+        display: flex;
+        gap: 4px;
+
+        button {
+            border: 1px solid #ddd;
+            background: white;
+            padding: 4px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            color: var(--text-primary);
+
+            &:hover:not(:disabled) {
+                background: #f0f0f0;
+            }
+
+            &.active {
+                background: var(--primary-blue);
+                color: white;
+                border-color: var(--primary-blue);
+            }
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: default;
+            }
+        }
+    }
+}
+
+// Cancel Confirmation Modal
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 8px;
+    padding: 30px 40px;
+    max-width: 550px; // Wider modal
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-icon {
+    margin-bottom: 20px;
+
+    svg {
+        width: 80px;
+        height: 80px;
+    }
+
+    // Custom yellow circle with question mark
+    .icon-circle {
+        width: 80px;
+        height: 80px;
+        border: 4px solid #ffc107;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+
+        .question-mark {
+            font-size: 48px;
+            color: #ffc107;
+            font-weight: bold;
+        }
+    }
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.modal-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+
+    .btn {
+        padding: 10px 24px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &.btn-outline {
+            background: white;
+            border: 1px solid #333;
+            color: #333;
+
+            &:hover {
+                background: #f5f5f5;
+            }
+        }
+
+        &.btn-primary {
+            background: #0d2b78;
+            border: 1px solid #0d2b78;
+            color: white;
+
+            &:hover {
+                background: #0a2260;
+            }
+        }
+    }
+}

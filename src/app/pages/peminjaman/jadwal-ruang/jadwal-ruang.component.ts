@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LayoutService } from '../../../shared/services/layout.service';
 
 interface TimeSlot {
     time: string;
@@ -30,8 +31,8 @@ interface Booking {
 export class JadwalRuangComponent implements OnInit {
     // Filter values
     selectedGedung: string = 'Gedung KH. Mas Mansyur';
-    selectedLantai: string = '';
-    selectedRuang: string = '';
+    selectedLantai: string = 'Semua lantai';
+    selectedRuang: string = 'Semua ruang';
     selectedDate: string = '';
     capacityFilter: number | null = null;
 
@@ -88,7 +89,10 @@ export class JadwalRuangComponent implements OnInit {
     // Bookings data (dummy) - untuk Gedung KH. Mas Mansyur
     bookings: Booking[] = [
         // Ruang Lecture A (id: 1)
-        { roomId: 1, startHour: 8, endHour: 10, eventType: 'Kuliah', unit: 'Teknik Sipil', status: 'verified' },
+        { roomId: 1, startHour: 8, endHour: 11, eventType: 'Kuliah', unit: 'Teknik Sipil', status: 'verified' },
+
+        // Ruang Lecture B (id: 2)
+        { roomId: 2, startHour: 15, endHour: 18, eventType: 'Kuliah', unit: 'Teknik Sipil', status: 'verified' },
 
         // Lab Komputer 1 (id: 3)
         { roomId: 3, startHour: 12, endHour: 14, eventType: 'Praktikum', unit: 'Teknik Informatika', status: 'verified' },
@@ -98,15 +102,25 @@ export class JadwalRuangComponent implements OnInit {
         { roomId: 5, startHour: 13, endHour: 16, eventType: 'Rapat', unit: 'Badan Sistem Informasi', status: 'pending' },
 
         // Ruang Rapat Dekan (id: 6)
-        { roomId: 6, startHour: 10, endHour: 12, eventType: 'Rapat Pimpinan', unit: 'Dekanat FTSP', status: 'verified' }
+        { roomId: 6, startHour: 10, endHour: 13, eventType: 'Rapat Pimpinan', unit: 'Dekanat FTSP', status: 'verified' }
     ];
 
 
 
 
-    constructor(private router: Router) { }
+    // Role state
+    currentRole: string = 'tendik';
+
+    constructor(
+        private router: Router,
+        private layoutService: LayoutService // Inject LayoutService
+    ) { }
 
     ngOnInit(): void {
+        this.layoutService.currentUserRole$.subscribe(role => {
+            this.currentRole = role;
+        });
+
         this.initializeTimeSlots();
         this.setTodayDate();
         this.loadRoomsForGedung();
@@ -133,8 +147,8 @@ export class JadwalRuangComponent implements OnInit {
 
     onGedungChange(): void {
         // Reset filters and load new rooms when gedung changes
-        this.selectedLantai = '';
-        this.selectedRuang = '';
+        this.selectedLantai = 'Semua lantai';
+        this.selectedRuang = 'Semua ruang';
         this.loadRoomsForGedung();
         this.updateRuangList();
     }
@@ -150,7 +164,7 @@ export class JadwalRuangComponent implements OnInit {
 
     onLantaiChange(): void {
         // Reset ruang filter when lantai changes
-        this.selectedRuang = '';
+        this.selectedRuang = 'Semua ruang';
         this.updateRuangList();
     }
 
@@ -205,6 +219,11 @@ export class JadwalRuangComponent implements OnInit {
     }
 
     onCellClick(room: Room, hour: number): void {
+        // If Mahasiswa, prevent click/booking
+        if (this.currentRole === 'mahasiswa') {
+            return;
+        }
+
         const booking = this.getBookingForCell(room.id, hour);
         if (!booking) {
             // Navigate to form peminjaman

@@ -1,8 +1,29 @@
-<aside class="sidebar">
+<div class="sidebar-overlay" *ngIf="isOpen" (click)="closeSidebar()"></div>
+
+<aside class="sidebar" [class.open]="isOpen">
+    <!-- Mobile Header inside Sidebar -->
+    <div class="sidebar-mobile-header">
+        <button class="back-btn" (click)="closeSidebar()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+            </svg>
+        </button>
+        <img src="assets/images/LogoUII.png" alt="Logo UII" class="mobile-logo">
+    </div>
+
+    <!-- User Profile Header (Blue background) similar to image 2 -->
+    <div class="sidebar-user-header" *ngIf="isOpen">
+        <!-- Only show on mobile open? Or always? Image 2 shows "Dashboard" on blue bg. -->
+        <!-- Wait, image 2 has "Dashboard" with trophy icon on blue background as the first item? No, that looks like a menu item. -->
+        <!-- Let's stick to the menu list for now. The image shows a blue header bar with back arrow and logo. -->
+    </div>
+
     <nav class="sidebar-nav">
-        <a *ngFor="let item of menuItems" [routerLink]="item.route" class="nav-item" [class.active]="item.active"
-            routerLinkActive="active">
-            <!-- Calendar Icon -->
+        <!-- Re-add menu items -->
+        <a *ngFor="let item of menuItems" [routerLink]="item.route" class="nav-item" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact: false}" (click)="closeSidebar()"> <!-- Close on click -->
+
+            <!-- Icons -->
             <svg *ngIf="item.icon === 'calendar'" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -10,7 +31,6 @@
                 <line x1="8" y1="2" x2="8" y2="6"></line>
                 <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
-            <!-- Users Icon -->
             <svg *ngIf="item.icon === 'users'" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
